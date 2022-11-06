@@ -26,19 +26,19 @@ $app->get('/users/{id}', function ($request, $response, $args) {
     return $this->get('renderer')->render($response, 'users/show.phtml', $params);
 });
 
-$app->get('/courses', function ($request, $response) use ($courses) {
+/*$app->get('/courses', function ($request, $response) use ($courses) {
     $params = [
         'courses' => $courses
     ];
     return $this->get('renderer')->render($response, 'courses/index.phtml', $params);
-});
+});*/
 
-$app->get('/courses', function ($request, $response) use ($courses) {
+/*$app->get('/courses', function ($request, $response) use ($courses) {
     $params = [
         'courses' => $courses
     ];
     return $this->get('renderer')->render($response, 'courses/index.phtml', $params);
-});
+});*/
 
 /*$app->get('/courses/{id}', function ($request, $response, array $args) {
     $id = $args['id'];

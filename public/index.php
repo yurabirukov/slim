@@ -40,9 +40,9 @@ $app->get('/courses', function ($request, $response) use ($courses) {
     return $this->get('renderer')->render($response, 'courses/index.phtml', $params);
 });
 
-$app->get('/courses/{id}', function ($request, $response, array $args) {
+/*$app->get('/courses/{id}', function ($request, $response, array $args) {
     $id = $args['id'];
     return $response->write("Course id: {$id}");
-});
+});*/
 
 $app->run();

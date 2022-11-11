@@ -39,6 +39,36 @@ $app->get('/users', function ($request, $response) use ($users) {
     return $this->get('renderer')->render($response, 'users/index.phtml', $params);
 });
 
+
+$app->post('/users', function ($request, $response) {
+    $user = $request->getParsedBodyParam('user');
+    $errors =[];
+      if (empty($user['name'])) {
+        $errors['name'] = "Can't be blank";
+    }
+    if (empty($user['email'])) {
+        $errors['email'] = "Can't be blank";
+    }
+    if (count($errors) === 0) {
+        file_put_contents($user['name'].'.txt',json_encode($user));
+        return $response->withRedirect('/users', 302);
+    }
+    $params = [
+        'user' => $user,
+        'errors' => $errors
+    ];
+    return $this->get('renderer')->render($response, "users/new.phtml", $params);
+});
+
+$app->get('/users/new', function ($request, $response) {
+    $params = [
+        'user' => ['name' => '', 'email' => ''],
+        'errors' => []
+    ];
+    return $this->get('renderer')->render($response, "users/new.phtml", $params);
+});
+
+
 /*$app->get('/users/{id}', function ($request, $response, $args) {
     $params = ['id' => $args['id'], 'nickname' => 'user-' . $args['id']];
     // Указанный путь считается относительно базовой директории для шаблонов, заданной на этапе конфигурации
